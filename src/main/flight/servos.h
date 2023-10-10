@@ -68,7 +68,10 @@ typedef enum {
     SERVO_HELI_LEFT = 0,
     SERVO_HELI_RIGHT = 1,
     SERVO_HELI_TOP = 2,
-    SERVO_HELI_RUD = 3
+    SERVO_HELI_RUD = 3,
+
+    SERVO_LEFT_WHEEL = 2,
+    SERVO_RIGHT_WHEEL = 3
 
 } servoIndex_e; // FIXME rename to servoChannel_e
 

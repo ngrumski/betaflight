@@ -980,7 +980,7 @@ FAST_CODE_NOINLINE void mixTable(timeUs_t currentTimeUs, uint8_t vbatPidCompensa
         applyMotorStop();
     } else {
         // Apply the mix to motor endpoints
-        applyMixToMotors(motorMix, activeMixer);
+        applyMixToMotors(motorMix, activeMixer); //todo(nick): more meat here
     }
 }
 

@@ -195,6 +195,7 @@ const mixerRules_t servoMixers[] = {
     { 0, NULL },                // MULTITYPE_CUSTOM_PLANE
     { 0, NULL },                // MULTITYPE_CUSTOM_TRI
     { 0, NULL },
+    { 0, servoMixerFlyingWing },                // COMBAT //TODO(nick): add servo rules
 };
 
 int16_t determineServoMiddleOrForwardFromChannel(servoIndex_e servoIndex)
@@ -341,6 +342,11 @@ void writeServos(void)
         writeServoWithTracking(servoIndex++, SERVO_FLAPPERON_2);
         break;
 
+    case MIXER_COMBAT:
+        writeServoWithTracking(servoIndex++, SERVO_LEFT_WHEEL);
+        writeServoWithTracking(servoIndex++, SERVO_RIGHT_WHEEL);
+        break;
+
     case MIXER_CUSTOM_AIRPLANE:
     case MIXER_AIRPLANE:
         for (int i = SERVO_PLANE_INDEX_MIN; i <= SERVO_PLANE_INDEX_MAX; i++) {
@@ -411,7 +417,7 @@ void servoMixer(void)
     } else {
         // Assisted modes (gyro only or gyro+acc according to AUX configuration in Gui
         input[INPUT_STABILIZED_ROLL] = pidData[FD_ROLL].Sum * PID_SERVO_MIXER_SCALING;
-        input[INPUT_STABILIZED_PITCH] = pidData[FD_PITCH].Sum * PID_SERVO_MIXER_SCALING;
+        input[INPUT_STABILIZED_PITCH] = pidData[FD_PITCH].Sum * PID_SERVO_MIXER_SCALING; //todo(nick):This is the meat of this i think, also why are servos and motors different
         input[INPUT_STABILIZED_YAW] = pidData[FD_YAW].Sum * PID_SERVO_MIXER_SCALING;
 
         // Reverse yaw servo when inverted in 3D mode
@@ -486,6 +492,7 @@ static void servoTable(void)
         break;
     case MIXER_CUSTOM_AIRPLANE:
     case MIXER_FLYING_WING:
+    case MIXER_COMBAT:
     case MIXER_AIRPLANE:
     case MIXER_BICOPTER:
     case MIXER_DUALCOPTER:

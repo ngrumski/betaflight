@@ -1040,7 +1040,7 @@ bool processRx(timeUs_t currentTimeUs)
         DISABLE_FLIGHT_MODE(PASSTHRU_MODE);
     }
 
-    if (mixerConfig()->mixerMode == MIXER_FLYING_WING || mixerConfig()->mixerMode == MIXER_AIRPLANE) {
+    if (mixerConfig()->mixerMode == MIXER_FLYING_WING || mixerConfig()->mixerMode == MIXER_AIRPLANE || mixerConfig()->mixerMode == MIXER_COMBAT) {
         DISABLE_FLIGHT_MODE(HEADFREE_MODE);
     }
 
@@ -1229,6 +1229,7 @@ static FAST_CODE_NOINLINE void subTaskRcCommand(timeUs_t currentTimeUs)
 #endif
                 && mixerConfig()->mixerMode != MIXER_AIRPLANE
                 && mixerConfig()->mixerMode != MIXER_FLYING_WING
+                && mixerConfig()->mixerMode != MIXER_COMBAT
 #endif
     ) {
         resetYawAxis();
